@@ -1,0 +1,9 @@
+{
+    "name": "test-project",
+    "version": "1.0.0",
+    "scripts": {
+        "lint": "echo 'Linting...' && exit 0",
+        "test": "node test/index.test.js"
+    },
+    "devDependencies": {}
+}
