@@ -1,0 +1,34 @@
+name: Multi-Step Condizionale
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-condizioni:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step iniziale che può fallire
+        run: |
+          echo "Eseguendo step iniziale"
+          exit 1
+
+      - name: Step solo se precedente successo
+        if: success()
+        run: echo "Il precedente step ha avuto successo"
+
+      - name: Step solo se precedente fallisce
+        if: failure()
+        run: echo "Il precedente step è fallito"
+
+      - name: Step sempre eseguito
+        if: always()
+        run: echo "Questo step viene eseguito sempre"
+
+      - name: Step solo su branch main
+        if: github.ref == 'refs/heads/main'
+        run: echo "Questo step viene eseguito solo su branch main"
+
+      - name: Step solo per pull request
+        if: github.event_name == 'pull_request'
+        run: echo "Questo step viene eseguito solo per pull request"
