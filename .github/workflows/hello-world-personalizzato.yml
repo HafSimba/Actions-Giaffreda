@@ -1,0 +1,27 @@
+
+# Esercizio: Hello World Personalizzato - workflow che stampa variabili di contesto e file modificati
+name: Hello World Personalizzato
+run-name: ${{ github.actor }} sta testando GitHub Actions 🚀
+on: [push]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Informazioni repository e commit
+        run: |
+          echo "Nome completo del repository (owner/repo): ${{ github.repository }}"
+          echo "SHA del commit: ${{ github.sha }}"
+          echo "URL del repository: ${{ github.repositoryUrl }}"
+          echo "Data e ora dell'esecuzione (UTC): $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+      - name: Lista file modificati nell'ultimo commit
+        run: |
+          echo "File modificati nell'ultimo commit:"
+          echo "${{ toJson(github.event.head_commit.modified) }}"
+           
+      - name: Final status
+        run: echo "This job's status is ${{ job.status }}." 

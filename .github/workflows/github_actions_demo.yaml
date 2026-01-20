@@ -24,4 +24,4 @@ jobs:
         run: ls ${{ github.workspace }}
 
       - name: Final status
-        run: echo "🍏 This job's status is ${{ job.status }}."
+        run: echo "🍏 This job's status is ${{ job.status }}." 
